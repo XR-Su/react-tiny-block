@@ -6,24 +6,12 @@
  */
 
 import React from 'react'
+import Trigger from '../components/trigger'
 
-class Trigger extends React.Component {
+class Test extends React.Component {
     render() {
-        const _props = this.props
-        console.log(React.Children.only(_props.children))
-        console.log(_props.children)
-        let portal = React.createElement(
-          'span',
-          {className: 'testTrigger', key: '123'},
-          '123'
-        )
-        let portal2 = React.createElement(
-          'span',
-          {className: 'testTrigger', key: '321'},
-          '321'
-        )
-        return [portal,portal2]
+        return <Trigger><button>trig</button></Trigger>
     }
 }
 
-export default Trigger
+export default Test
