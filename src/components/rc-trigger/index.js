@@ -13,16 +13,36 @@ import { setDomStyle } from "utils";
 
 const noop = () => {};
 
+/**
+ * @desc 对props进行的一些加工？
+ * @param _this
+ * @private
+ */
 let _initialiseProps = _this => {
   /** 事件 **/
   _this.onClick = event => {
     if (event && event.preventDefault) {
       event.preventDefault();
     }
-
     _this.setPopupVisible(!_this.state.popupVisible, event);
   };
 
+  _this.onDocumentClick = event => {
+    if (!_this.hasPopupMouseDown) {
+      _this.close();
+    }
+  };
+
+  _this.onPopupMouseDown = () => {
+    // 设置属性，让 document 接收到事件后不做关闭弹框处理
+    _this.hasPopupMouseDown = true;
+    clearTimeout(_this.mouseDownTimeout);
+    _this.mouseDownTimeout = setTimeout(() => {
+      _this.hasPopupMouseDown = false;
+    }, 0);
+  };
+
+  /** set **/
   // 控制 popover 显示
   _this.setPopupVisible = (popupVisible, event) => {
     const _props = _this.props;
@@ -52,10 +72,17 @@ let _initialiseProps = _this => {
   /** portal **/
   // 获取 portal 挂载内容
   _this.getComponent = () => {
-    const _props = _this.props;
+    const { popup } = _this.props;
     const { popupVisible, point } = _this.state;
-    return React.createElement(Popup, { point: point, visible: popupVisible });
-    // return React.createElement("p", {}, "pppppp");
+    return React.createElement(
+      Popup,
+      {
+        point: point,
+        visible: popupVisible,
+        onMouseDown: _this.onPopupMouseDown
+      },
+      typeof popup === "function" ? popup() : popup
+    );
   };
 
   // 获取 portal 挂载容器
@@ -75,6 +102,7 @@ let _initialiseProps = _this => {
     return popupContainer;
   };
 };
+
 export default class Trigger extends Component {
   constructor(props) {
     super(props);
@@ -86,8 +114,41 @@ export default class Trigger extends Component {
       popupVisible = !!props.defaultPopupVisible;
     }
     this.state = {
-      popupVisible: popupVisible
+      popupVisible
     };
+  }
+  componentDidMount() {}
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    // 不能放在 DidMount 里，因为第一次进来 popVisible 一般为 false
+    const state = this.state;
+    if (state.popupVisible) {
+      this.clickOutsideHandler = window.document.addEventListener(
+        "mousedown",
+        this.onDocumentClick
+      );
+    }
+  }
+
+  componentWillUnmount() {
+    this.clearOutsideHandler();
+  }
+
+  static getDerivedStateFromProps(nextProps, preState) {
+    const { popupVisible } = nextProps;
+    if (popupVisible !== undefined) {
+      return { popupVisible };
+    }
+    return {};
+  }
+
+  clearOutsideHandler() {
+    if (this.clickOutsideHandler) {
+      this.clickOutsideHandler.remove();
+      this.clickOutsideHandler = null;
+    }
+  }
+  close() {
+    this.setPopupVisible(false);
   }
   render() {
     const { children } = this.props;
@@ -113,5 +174,8 @@ Trigger.defaultProps = {
 };
 
 Trigger.proptypes = {
-  popup: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired
+  popup: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+  onPopupVisibleChange: PropTypes.func,
+  popupVisible: PropTypes.bool,
+  defaultPopupVisible: PropTypes.bool
 };

@@ -6,14 +6,40 @@
  */
 
 import React from "react";
-import Trigger from "../components/rc-trigger";
+import Tooltip from "../components/rc-tooltip";
 
 class Test extends React.Component {
+  state = {
+    visible: false
+  };
+  handleCloseTootip = () => {
+    this.setState({ visible: false });
+  };
+
+  onVisibleChange = val => {
+    this.setState({ visible: val });
+  };
   render() {
     return (
-      <Trigger>
+      <Tooltip
+        visible={this.state.visible}
+        onVisibleChange={this.onVisibleChange}
+        overlay={
+          <span
+            onClick={this.handleCloseTootip}
+            style={{
+              backgroundColor: "red",
+              display: "inline-block",
+              width: "100px",
+              height: "100px"
+            }}
+          >
+            info
+          </span>
+        }
+      >
         <button>trig</button>
-      </Trigger>
+      </Tooltip>
     );
   }
 }

@@ -6,9 +6,19 @@
  */
 
 export const setDomStyle = (target_dom, style_obj) => {
-	let style_str = ';'
-	for(let key in style_obj) {
-		style_str += key + ':' + style_obj[key] + ';'
-	}
-	target_dom.style.cssText = style_str
-}
+  let style_str = ";";
+  for (let key in style_obj) {
+    style_str += key + ":" + style_obj[key] + ";";
+  }
+  target_dom.style.cssText = style_str;
+};
+
+export const extractPropertise = (obj, keys) => {
+  let target = {};
+  for (let key in obj) {
+    if (keys.indexOf(key) == -1) continue;
+    if (!Object.prototype.hasOwnProperty.call(obj, key)) continue; // ???
+    target[key] = obj[key];
+  }
+  return target;
+};
