@@ -6,6 +6,7 @@
  */
 
 import React from "react";
+import { findDOMNode } from "react-dom";
 import Tooltip from "../components/rc-tooltip";
 
 class Test extends React.Component {
@@ -25,8 +26,7 @@ class Test extends React.Component {
         visible={this.state.visible}
         onVisibleChange={this.onVisibleChange}
         overlay={
-          <span
-            onClick={this.handleCloseTootip}
+          <div
             style={{
               backgroundColor: "red",
               display: "inline-block",
@@ -34,8 +34,8 @@ class Test extends React.Component {
               height: "100px"
             }}
           >
-            info
-          </span>
+            <span onClick={this.handleCloseTootip}>info</span>
+          </div>
         }
       >
         <button>trig</button>

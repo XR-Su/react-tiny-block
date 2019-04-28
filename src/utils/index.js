@@ -22,3 +22,14 @@ export const extractPropertise = (obj, keys) => {
   }
   return target;
 };
+
+export const containDomNode = (target, container) => {
+  let node = container;
+  while (node) {
+    if (target === container) {
+      return true;
+    }
+    node = node.parentNode;
+  }
+  return false;
+};
