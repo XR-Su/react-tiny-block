@@ -179,15 +179,12 @@ export default class Trigger extends Component {
 
     const trigger = React.cloneElement(child, newChildProps);
 
-    // let portal = null;
     let portal = void 0;
     if (popupVisible || this.savedPopup) {
-      // portal = ReactDOM.createPortal(this.getComponent(), this.getContainer());
       // 在 portal 组件中，会在 portal unmount 时做处理；
-      // 这里必须传的是函数，而不是 getContainer(),如果是函数调用的话，则每次都会新创建一个 container 挂载到 body 下；
+      // 这里必须传的是函数，而不是 getContainer()，如果是函数调用的话，则每次都会新创建一个 container 挂载到 body 下；
       portal = React.createElement(
         Portal,
-        // { container: this.getContainer(), key: "portal" },
         { getContainer: this.getContainer, key: "portal" },
         this.getComponent()
       );

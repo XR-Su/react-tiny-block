@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 
 export default class Portal extends Component {
   componentDidMount() {
+    // 只创建一次 container
     this.createContainer();
   }
 
@@ -19,9 +20,7 @@ export default class Portal extends Component {
   }
   createContainer = () => {
     const { getContainer } = this.props;
-    // const { container } = this.props;
     this.container = getContainer();
-    // this.container = container;
     this.forceUpdate();
   };
   removeContainer = () => {
@@ -41,7 +40,6 @@ export default class Portal extends Component {
 }
 
 Portal.propTypes = {
-  // container: PropTypes.object.isRequired,
   getContainer: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired
 };
