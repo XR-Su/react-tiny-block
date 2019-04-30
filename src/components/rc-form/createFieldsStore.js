@@ -29,6 +29,10 @@ class FieldsStore {
 
     return { [valuePropName]: fieldValue };
   }
+  setFields(fields) {
+    let nowFields = { ...this.fields, ...fields };
+    this.fields = nowFields;
+  }
   getField(name) {
     return this.fields[name];
   }

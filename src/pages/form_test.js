@@ -7,17 +7,21 @@
 
 import React, { Component } from "react";
 import Form from "../components/form/form";
+import TestInput from "./input_test";
 class FormTest extends Component {
+  handleChange = () => {
+    this.props.form.setFields({ aaa: { value: "bbbbb" } });
+  };
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
       <div>
         <Form>
-          {getFieldDecorator("aaa", { initialValue: "123321" })(
-            <input type="text" />
-          )}
+          {getFieldDecorator("aaa", { initialValue: "123321" })(<TestInput />)}
           {/*<input type="text" />*/}
         </Form>
+        {/*<TestInput />*/}
+        <button onClick={this.handleChange}>change</button>
       </div>
     );
   }
