@@ -19,7 +19,7 @@ export default class TestInput extends Component {
     }
     return {};
   }
-  static onChange = e => {
+  onChange = e => {
     const value = e.target.value;
     this.setState({ value: value });
     this.props.onChange && this.props.onChange(value);

@@ -21,7 +21,7 @@ const createBaseForm = (...args) => {
   let option = args.length > 0 && args[0] !== undefined ? args[0] : {};
   let mapPropsToFields = option.mapPropsToFields;
   return WrappedComponent => {
-    class Form extends Component {
+    class RCForm extends Component {
       constructor(props) {
         super(props);
         _initialise(this);
@@ -82,7 +82,7 @@ const createBaseForm = (...args) => {
         return React.createElement(WrappedComponent, { ...formProps });
       }
     }
-    return Form;
+    return RCForm;
   };
 };
 
