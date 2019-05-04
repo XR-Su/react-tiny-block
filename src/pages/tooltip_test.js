@@ -9,7 +9,7 @@ import React from "react";
 import { findDOMNode } from "react-dom";
 import Tooltip from "../components/rc-tooltip";
 
-class Test extends React.Component {
+class Tooltip_test extends React.Component {
   state = {
     visible: false
   };
@@ -44,4 +44,4 @@ class Test extends React.Component {
   }
 }
 
-export default Test;
+export default Tooltip_test;

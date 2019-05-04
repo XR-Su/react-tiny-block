@@ -101,7 +101,7 @@ let _initialiseProps = _this => {
     const popupContainer = document.createElement("div");
     const style = {
       position: "absolute",
-      top: "0px",
+      top: "0",
       left: "0",
       width: "100%"
     };
