@@ -7,7 +7,7 @@
 
 import React from "react";
 import { findDOMNode } from "react-dom";
-import Tooltip from "../components/rc-tooltip";
+import Tooltip from "../antd-components/rc-tooltip";
 
 class Tooltip_test extends React.Component {
   state = {

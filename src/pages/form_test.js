@@ -6,7 +6,7 @@
  */
 
 import React, { Component } from "react";
-import Form from "../components/form/form";
+import Form from "../antd-components/form/form";
 import TestInput from "./input_test";
 class FormTest extends Component {
   handleChange = () => {

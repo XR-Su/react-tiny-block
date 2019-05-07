@@ -6,13 +6,13 @@
  */
 
 import React, { Component } from "react";
-import Tooltip_test from "./tooltip_test";
-// import FormTest from "./form_test";
+import TooltipTest from "./tooltip_test";
+import TreeTest from './tree_test'
 export default class extends Component {
   render() {
     return (
       <div>
-        <Tooltip_test />
+        <TreeTest />
       </div>
     );
   }
