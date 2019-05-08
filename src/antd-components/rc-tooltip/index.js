@@ -50,7 +50,7 @@ export default class Tooltip extends Component {
 }
 
 Tooltip.defaultProps = {
-  prefixCls: "rc-tooltip",
+  prefixCls: "rc-tooltip"
 };
 
 Tooltip.propTypes = {

@@ -7,7 +7,7 @@
 
 import React, { Component } from "react";
 import TooltipTest from "./tooltip_test";
-import TreeTest from './tree_test'
+import TreeTest from "./tree_test";
 export default class extends Component {
   render() {
     return (

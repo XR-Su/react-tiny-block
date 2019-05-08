@@ -11,7 +11,9 @@ import TreeNode from "./node";
 import { TreeProvider } from "./treeContext";
 
 export default class Tree extends Component {
-  onCheck = nodes => {console.log(nodes)};
+  onCheck = nodes => {
+    console.log(nodes);
+  };
   onExpand = node => {
     console.log(node);
   };

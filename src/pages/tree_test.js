@@ -40,12 +40,12 @@ export default class TreeTest extends Component {
     }
   ];
   onSelect = (selectedKeys, info) => {
-    console.log('selected', selectedKeys, info);
-  }
+    console.log("selected", selectedKeys, info);
+  };
 
   onCheck = (checkedKeys, info) => {
-    console.log('onCheck', checkedKeys, info);
-  }
+    console.log("onCheck", checkedKeys, info);
+  };
   render() {
     return (
       <div>
