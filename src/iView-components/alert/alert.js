@@ -5,7 +5,7 @@
  * @date 2019-05-03
  */
 import React, { Component } from "react";
-import "./alert.scss";
+import styles from "./alert.less?modules";
 
 const getUuid = (() => {
   let seed = 0;
@@ -47,7 +47,7 @@ export default class Alert extends Component {
   renderAlertNotices = () => {
     const { notices } = this.state;
     return notices.map(notice => (
-      <div className="alert-content" key={notice.name}>
+      <div className={styles.content} key={notice.name}>
         {notice.content}
       </div>
     ));
@@ -55,8 +55,8 @@ export default class Alert extends Component {
   render() {
     const { renderAlertNotices } = this;
     return (
-      <div className="alert">
-        <div className="alert-main">{renderAlertNotices()}</div>
+      <div className={styles.alert}>
+        <div className={styles.contentWrapper}>{renderAlertNotices()}</div>
       </div>
     );
   }
