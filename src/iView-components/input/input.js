@@ -23,15 +23,14 @@ export default class Input extends Component {
   }
   handleChange = e => {
     const newValue = e.target.value;
-    const { onFieldChange, onChange } = this.props;
+    const { onChange } = this.props;
     this.setState({ value: newValue });
-    onFieldChange(newValue);
     onChange(newValue);
   };
   handleBlur = () => {
-    const { onFieldBlur } = this.props;
+    const { onBlur } = this.props;
     const { value } = this.state;
-    onFieldBlur(value);
+    onBlur(value);
   };
   render() {
     const { value } = this.state;
@@ -50,13 +49,11 @@ export default class Input extends Component {
 const noop = () => {};
 
 Input.propTypes = {
-  onFieldBlur: PropTypes.func,
-  onFieldChange: PropTypes.func,
+  onBlur: PropTypes.func,
   onChange: PropTypes.func
 };
 
-Input.defauleProps = {
-  onFieldBlur: noop,
-  onFieldChange: noop,
+Input.defaultProps = {
+  onBlur: PropTypes.func,
   onChange: noop
 };

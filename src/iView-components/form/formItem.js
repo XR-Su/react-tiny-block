@@ -4,24 +4,31 @@
  * @author RiSusss
  * @date 2019-05-02
  */
-import React, { Component, useContext } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import FormContext from "./formContext";
 
 const _initialise = _this => {
   _this.validate = (trigger, callback) => {
-    const { name, rules, form } = _this.props;
+    const { name, rules } = _this.props;
+    const form = _this.context;
     console.log("check:", name, "value:", form.model[name]);
   };
 };
 
 class FormItem extends Component {
+  static contextType = FormContext;
   constructor(props) {
     super(props);
     _initialise(this);
   }
   componentDidMount() {
-    this.props.form_demo.addFormItem(this);
+    // this.props.form_demo.addFormItem(this);
+    const {
+      context: form,
+      props: { name }
+    } = this;
+    form.addFormItem(name, this);
   }
   /**
    * 输入组件失去焦点时触发
@@ -34,17 +41,26 @@ class FormItem extends Component {
    * @param value
    */
   onFieldChange = value => {
-    const { form, name } = this.props;
+    const { name } = this.props;
+    const form = this.context;
     form.model[name] = value;
   };
   renderFormItem = () => {
     const { children, name } = this.props;
-    const { onFieldBlur, onFieldChange } = this;
+    const { onFieldBlur, onFieldChange, context: form } = this;
+    const value = form && form.model[name];
+    console.log("item value", value);
     let child = React.Children.only(children);
     child =
       child.type == "button"
         ? child
-        : React.cloneElement(child, { ...{ onFieldBlur, onFieldChange } });
+        : React.cloneElement(child, {
+            ...{
+              onBlur: onFieldBlur,
+              onChange: onFieldChange,
+              value: value || ""
+            }
+          });
     return (
       <div>
         <label htmlFor="">{name}</label>
@@ -53,16 +69,12 @@ class FormItem extends Component {
     );
   };
   render() {
+    alert("rerender item");
     return this.renderFormItem();
   }
 }
 
-const FormItemWrapper = props => {
-  const form = useContext(FormContext);
-  return <FormItem {...props} {...{ form }} />;
-};
-
-export default FormItemWrapper;
+export default FormItem;
 
 FormItem.propTypes = {
   name: PropTypes.string,

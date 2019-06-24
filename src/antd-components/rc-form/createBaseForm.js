@@ -71,7 +71,7 @@ const createBaseForm = (...args) => {
       onCollectValidate(name, action, ...args) {
         let newValue = args && args.length > 0 ? args[0] : {};
         this.fieldsStore.setFields({ [name]: { value: newValue } });
-        debugger;
+        // debugger;
       }
       setFields(fields, callback) {
         this.fieldsStore.setFields(fields);

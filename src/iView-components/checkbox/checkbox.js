@@ -4,11 +4,12 @@
  * @author RiSusss
  * @date 2019-05-02
  */
-import React, { Component, useContext } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import CheckboxContext from "./checkboxContext";
+import checkboxContext from "./checkboxContext";
 
 class Checkbox extends Component {
+  static contextType = checkboxContext;
   constructor(props) {
     super(props);
     this.state = {
@@ -16,12 +17,12 @@ class Checkbox extends Component {
     };
   }
   static getDerivedStateFromProps(nextProps, preState) {
-    const { cbGroup, value, trueValue, falseValue, label } = nextProps;
+    const { value, trueValue, falseValue } = nextProps;
     let newValue = value;
-    if (cbGroup) {
-      // 使用 CheckboxGroup
-      newValue = cbGroup.values.indexOf(label) >= 0 ? trueValue : falseValue;
-    }
+    // if (cbGroup) {
+    // 使用 CheckboxGroup
+    //   newValue = cbGroup.values.indexOf(label) >= 0 ? trueValue : falseValue;
+    // }
     if (newValue === trueValue || newValue === falseValue) {
       return { value: newValue === trueValue };
     }
@@ -33,13 +34,14 @@ class Checkbox extends Component {
       return false;
     }
 
-    const { onChange, trueValue, falseValue, cbGroup, label } = this.props;
+    const { onChange, trueValue, falseValue, label } = this.props;
+    const groupContext = this.context;
     const checked = e.target.checked;
     const newValue = checked ? trueValue : falseValue;
     this.setState({ value: checked });
-    if (cbGroup) {
+    if (groupContext) {
       // 使用 CheckboxGroup
-      cbGroup.onCheckBoxChange(label);
+      groupContext.onCheckBoxChange(label);
     } else {
       onChange(newValue);
     }
@@ -64,12 +66,7 @@ class Checkbox extends Component {
   }
 }
 
-const CheckboxWrapper = props => {
-  const cbGroup = useContext(CheckboxContext);
-  return <Checkbox {...props} {...{ cbGroup }} />;
-};
-
-export default CheckboxWrapper;
+export default Checkbox;
 
 const noop = () => {};
 
@@ -92,7 +89,6 @@ Checkbox.propTypes = {
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   label: PropTypes.string,
-  cbGroup: PropTypes.object // CheckboxGroup 提供的对象
 };
 
 Checkbox.defaultProps = {
