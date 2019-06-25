@@ -14,7 +14,7 @@ export interface CheckboxProps {
   onChange?: (val: boolean) => void;
 }
 
-class Checkbox extends Component<CheckboxProps, {}> {
+class ICheckbox extends Component<CheckboxProps, {}> {
   static Group: typeof Group;
   render() {
     return React.createElement(CheckboxItem, { ...this.props });
@@ -35,5 +35,5 @@ class Group extends Component<GroupProps, {}> {
   }
 }
 
-Checkbox.Group = Group;
-export default Checkbox;
+ICheckbox.Group = Group;
+export default ICheckbox;

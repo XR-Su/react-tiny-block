@@ -40,13 +40,11 @@ class Form extends Component {
       value = model[key];
       this.model[key] = value;
     }
-    // console.log("model", this.model)
     this.forceUpdate();
   };
   render() {
     const { children } = this.props;
     const { onFormSubmit } = this;
-    alert("rerender form");
     return (
       <form onSubmit={onFormSubmit}>
         <FormProvider value={this}>

@@ -48,8 +48,8 @@ class FormItem extends Component {
   renderFormItem = () => {
     const { children, name } = this.props;
     const { onFieldBlur, onFieldChange, context: form } = this;
-    const value = form && form.model[name];
-    console.log("item value", value);
+    const value = form && form.model[name]; // get the value from model
+    // console.log("item value", value);
     let child = React.Children.only(children);
     child =
       child.type == "button"
@@ -69,7 +69,6 @@ class FormItem extends Component {
     );
   };
   render() {
-    alert("rerender item");
     return this.renderFormItem();
   }
 }

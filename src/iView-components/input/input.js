@@ -49,6 +49,7 @@ export default class Input extends Component {
 const noop = () => {};
 
 Input.propTypes = {
+  value: PropTypes.string,
   onBlur: PropTypes.func,
   onChange: PropTypes.func
 };

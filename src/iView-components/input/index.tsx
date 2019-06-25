@@ -8,8 +8,7 @@ import React, { Component } from "react";
 import Input from "./input";
 
 export interface IInputProps {
-  // onFiledBlur?: () => void;
-  // onFiledChange?: (val: string) => void;
+  value?: string;
   onBlur?: () => void;
   onChange?: (val: string) => void;
 }
