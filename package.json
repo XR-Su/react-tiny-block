@@ -36,6 +36,7 @@
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.3.5",
     "html-webpack-plugin": "^3.2.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^24.8.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
@@ -48,5 +49,10 @@
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.3.1",
     "webpack-node-externals": "1.6.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css?modules|less?modules)$": "identity-obj-proxy"
+    }
   }
 }

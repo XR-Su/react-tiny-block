@@ -1,6 +1,6 @@
 /**
  * @Name:
- * @Description:
+ * @Description: alert 组件的挂载实现
  * @author RiSusss
  * @date 2019-05-03
  */
@@ -29,6 +29,7 @@ Alert.newInstance = (properties, callback) => {
     container
   );
 
+  // 对外暴露出 add、remove 两个接口
   function ref(alert) {
     callback({
       add: alertProps => {

@@ -10,7 +10,8 @@ import { notice } from "../iView-components/alert";
 // import TooltipTest from "./tooltip_test";
 // import TreeTest from "./tree_test";
 // import TsCom from "./ts_page";
-import CheckBoxTest from "./checkbox_test";
+// import CheckBoxTest from "./checkbox_test";
+import IFormTest from "./iForm_test";
 
 export default class extends Component {
   handleAlert = () => {
@@ -18,10 +19,17 @@ export default class extends Component {
       content: "hello"
     });
   };
+  handleRender = () => {
+    this.form.handleRender();
+  };
   render() {
     return (
       <div>
-        <CheckBoxTest />
+        {/*<RenderTest ref={node => (this.form = node)}>*/}
+        {/*  <RenderInner />*/}
+        {/*</RenderTest>*/}
+        <IFormTest />
+        {/*<button onClick={this.handleRender}>rerender</button>*/}
         {/*<button onClick={this.handleAlert} />*/}
       </div>
     );
